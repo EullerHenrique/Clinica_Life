@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spring.clinica_life.models.Doctor;
 import spring.clinica_life.models.Schedule;
 import spring.clinica_life.services.doctor.DoctorService;
 import spring.clinica_life.services.schedule.ScheduleService;
@@ -28,17 +27,16 @@ public class ScheduleController {
     public ModelAndView getScheduling(){
 
         ModelAndView mv = new ModelAndView("schedule");
-        List<String> doctors = doctorService.findDistinctByEspecialidade();
-        mv.addObject("doctors", doctors);
+        List<String> esps = doctorService.findDistinctByEspecialidade();
+        mv.addObject("esps", esps);
 
         return mv;
 
     }
 
 
-
     @RequestMapping(value = "/schedule", method = RequestMethod.POST)
-    public String saveNewAdressAux(@Valid Schedule schedule, BindingResult result, RedirectAttributes attributes){
+    public String saveSchedule(@Valid Schedule schedule, BindingResult result, RedirectAttributes attributes){
 
         System.out.println(schedule.toString());
 

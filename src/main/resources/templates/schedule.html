@@ -178,7 +178,7 @@
           <div class="mb-3 col-md-6 form-floating">
             <select id="especialidade_medica" class="form-select" name="especialidade_medica" required>
               <option value="">&nbsp;</option>
-              <option th:each="doctor : ${doctors}" th:value="${doctor}" th:text="${doctor}"></option>
+              <option th:each="esp : ${esps}" th:value="${esp}" th:text="${esp}"></option>
             </select>
             <label for="especialidade_medica" class="form-label">Especialidade Médica</label>
           </div>
@@ -200,16 +200,6 @@
           <div class="mb-3 col-md-6 form-floating">
             <select id="hora_consulta" class="form-select" name="hora_consulta" required>
               <option value="">&nbsp;</option>
-              <option value="08:00">08:00</option>
-              <option value="09:00">09:00</option>
-              <option value="10:00">10:00</option>
-              <option value="11:00">11:00</option>
-              <option value="12:00">12:00</option>
-              <option value="13:00">13:00</option>
-              <option value="14:00">14:00</option>
-              <option value="15:00">15:00</option>
-              <option value="16:00">16:00</option>
-              <option value="17:00">17:00</option>
             </select>
             <label for="hora_consulta" class="form-label">Horário Disponível</label>
             <input type="time" id="hora_consulta_input" name="hora_consulta" hidden required>
@@ -276,7 +266,6 @@
   function findDoctors(espMed) {
 
       let select = document.getElementById("nome_do_medico");
-      let form = document.forms[0];
       let url = 'http://localhost:8080/find_doctors/'+espMed;
 
       //A api fetch busca uma resposta na url
@@ -313,6 +302,7 @@
                 select.add(option, select.options[0]);
 
                 doctors.forEach((doctor)=>{
+
                   option = new Option(doctor.nome, doctor.id_people);
                   select.add(option, select.options[1]);
 
@@ -342,6 +332,69 @@
 
     let id_doctor = document.getElementById("nome_do_medico").value;
     document.getElementById("id_doctor").setAttribute("value", id_doctor);
+
+    let select = document.getElementById("nome_do_medico");
+    let url = 'http://localhost:8080/find_shedules/'+id_doctor;
+
+    //A api fetch busca uma resposta na url
+
+    fetch(url)
+
+            .then(response => {
+
+              // A requisição finalizou com sucesso.
+
+              if (response.ok) {
+
+                // Converte a string JSON para um objeto JS
+                // A execução prosseguirá para o próximo .then
+
+                return response.json();
+
+              } else {
+
+                // A execução será deslocada para o bloco 'catch'
+                return Promise.reject(response);
+              }
+
+            })
+
+            .then(shedules => {
+
+              //Redefime p select
+
+              let options = document.querySelectorAll('#hora_consulta option');
+              options.forEach(option => option.remove());
+
+              let option = new Option("", "&nbsp");
+              select.add(option, select.options[0]);
+
+              shedules.forEach((shedule)=>{
+
+                option = new Option(shedule.hora_consulta, shedule.hora_consulta);
+                select.add(option, select.options[1]);
+
+              })
+
+            })
+
+            .catch(error => {
+
+              // Ocorreu um erro na comunicação com o servidor ou
+              // no processamento da requisição no JAVA, que pode não
+              // ter retornado uma string JSON válida
+
+              //Redefine o select
+
+              let options = document.querySelectorAll('#hora_consulta option');
+              options.forEach(option => option.remove());
+              let option = new Option("", "&nbsp");
+              select.add(option, select.options[0]);
+
+              console.warn('Falha inesperada: ', error);
+
+            });
+
 
   }
 
