@@ -190,7 +190,7 @@
             <label for="nome_do_medico" class="form-label">Nome do médico</label>
           </div>
 
-          <input type="text" id="id_medico" name="id_medico" hidden required>
+          <input type="text" id="id_doctor" name="id_doctor" hidden required>
 
           <div class="mb-3 col-md-6 form-floating">
             <input type="date" class="form-control" id="data_consulta" name="data_consulta"  >
@@ -340,11 +340,10 @@
 
   document.getElementById("nome_do_medico").onclick = () => {
 
-    let id_medico = document.getElementById("nome_do_medico").value;
-    document.getElementById("id_medico").setAttribute("value", id_medico);
+    let id_doctor = document.getElementById("nome_do_medico").value;
+    document.getElementById("id_doctor").setAttribute("value", id_doctor);
 
   }
-
 
 </script>
 
