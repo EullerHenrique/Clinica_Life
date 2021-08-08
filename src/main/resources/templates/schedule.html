@@ -260,7 +260,7 @@
   }
 
 
-  const inputEspMed = document.querySelector("#especialidade_medica");
+  let inputEspMed = document.querySelector("#especialidade_medica");
   inputEspMed.onchange = () => findDoctors(inputEspMed.value);
 
   function findDoctors(espMed) {
@@ -333,7 +333,7 @@
     let id_doctor = document.getElementById("nome_do_medico").value;
     document.getElementById("id_doctor").setAttribute("value", id_doctor);
 
-    let select = document.getElementById("nome_do_medico");
+    let select = document.getElementById("hora_consulta");
     let url = 'http://localhost:8080/find_shedules/'+id_doctor;
 
     //A api fetch busca uma resposta na url
@@ -369,10 +369,25 @@
               let option = new Option("", "&nbsp");
               select.add(option, select.options[0]);
 
+              let horarios_disponiveis = [];
+              for(let i=8; i <= 17; i++){
+                horarios_disponiveis.push(i+":"+"00");
+              }
+
               shedules.forEach((shedule)=>{
 
-                option = new Option(shedule.hora_consulta, shedule.hora_consulta);
-                select.add(option, select.options[1]);
+                horarios_disponiveis.forEach(h => {
+                  if(h===shedule.hora_consulta){
+
+                    horarios_disponiveis.pop(h);
+
+                  }
+                })
+
+                for(let i=0; i < horarios_disponiveis.length; i++){
+                  option = new Option(horarios_disponiveis[i], horarios_disponiveis[i]);
+                  select.add(option, select.options);
+                }
 
               })
 
@@ -390,8 +405,7 @@
               options.forEach(option => option.remove());
               let option = new Option("", "&nbsp");
               select.add(option, select.options[0]);
-
-              console.warn('Falha inesperada: ', error);
+              console.warn('Falha inesperada: g', error);
 
             });
 

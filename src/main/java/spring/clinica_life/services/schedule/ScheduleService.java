@@ -5,7 +5,7 @@ import java.util.List;
 public interface ScheduleService {
 
     List<Schedule> findAll();
-    List<Schedule> findById_doctor(Long id_doctor);
+    List<Schedule> findByDoctor(Long id_doctor);
     Schedule save(Schedule schedule);
 
 }

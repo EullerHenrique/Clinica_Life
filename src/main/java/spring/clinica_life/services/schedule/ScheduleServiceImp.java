@@ -19,8 +19,8 @@ public class ScheduleServiceImp implements ScheduleService{
     }
 
     @Override
-    public List<Schedule> findById_doctor(Long id_doctor) {
-        return scheduleRepository.findById_doctor(id_doctor);
+    public List<Schedule> findByDoctor(Long id_doctor) {
+        return scheduleRepository.findByDoctor(id_doctor);
     }
 
     @Override
