@@ -12,4 +12,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query(value = "SELECT DISTINCT d.especialidade FROM Doctor d", nativeQuery = true)
     List<String> findDistinctByEspecialidade();
+
 }

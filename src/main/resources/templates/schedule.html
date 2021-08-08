@@ -176,7 +176,7 @@
           </div>
 
           <div class="mb-3 col-md-6 form-floating">
-            <select id="especialidade_medica" class="form-select" name="especialidade_medica" >
+            <select id="especialidade_medica" class="form-select" name="especialidade_medica" required>
               <option value="">&nbsp;</option>
               <option th:each="doctor : ${doctors}" th:value="${doctor}" th:text="${doctor}"></option>
             </select>
@@ -184,15 +184,13 @@
           </div>
 
           <div class="mb-3 col-md-6 form-floating">
-            <select id="nome_do_medico" class="form-select" name="nome_do_medico" >
+            <select id="nome_do_medico" class="form-select" name="nome_do_medico" required>
               <option value="">&nbsp;</option>
             </select>
             <label for="nome_do_medico" class="form-label">Nome do médico</label>
           </div>
 
-          <!--
-          <input type="text" id="id_medico" name="id_medico" value="" hidden>
-          -->
+          <input type="text" id="id_medico" name="id_medico" hidden required>
 
           <div class="mb-3 col-md-6 form-floating">
             <input type="date" class="form-control" id="data_consulta" name="data_consulta"  >
@@ -214,24 +212,12 @@
               <option value="17:00">17:00</option>
             </select>
             <label for="hora_consulta" class="form-label">Horário Disponível</label>
-            <input type="time" id="hora_consulta_input" name="hora_consulta" hidden>
+            <input type="time" id="hora_consulta_input" name="hora_consulta" hidden required>
 
           </div>
           <div class="text-center">
             <button type="submit" class="btn text-white">Cadastrar</button>
           </div>
-
-          <script>
-
-            document.getElementById("hora_consulta").onclick = function (){
-
-              let hora_consulta = document.getElementById("hora_consulta").value;
-              document.getElementById("hora_consulta_input").setAttribute("value", hora_consulta);
-
-            }
-
-          </script>
-
 
           <div class="mt-3 mb-2">
 
@@ -276,6 +262,13 @@
 
 <script>
 
+  document.getElementById("hora_consulta").onclick = function (){
+
+    let hora_consulta = document.getElementById("hora_consulta").value;
+    document.getElementById("hora_consulta_input").setAttribute("value", hora_consulta);
+
+  }
+
 
   const inputEspMed = document.querySelector("#especialidade_medica");
   inputEspMed.onchange = () => findDoctors(inputEspMed.value);
@@ -298,6 +291,7 @@
 
                   // Converte a string JSON para um objeto JS
                   // A execução prosseguirá para o próximo .then
+
                   return response.json();
 
                 } else {
@@ -318,10 +312,8 @@
                 let option = new Option("", "&nbsp");
                 select.add(option, select.options[0]);
 
-
                 doctors.forEach((doctor)=>{
-
-                  option = new Option(doctor.nome, doctor.nome);
+                  option = new Option(doctor.nome, doctor.id_people);
                   select.add(option, select.options[1]);
 
                 })
@@ -346,14 +338,19 @@
               });
     }
 
+  document.getElementById("nome_do_medico").onclick = () => {
 
+    let id_medico = document.getElementById("nome_do_medico").value;
+    document.getElementById("id_medico").setAttribute("value", id_medico);
+
+  }
 
 
 </script>
 
 
-  </body>
-  </html>
+</body>
+</html>
 
 
 
