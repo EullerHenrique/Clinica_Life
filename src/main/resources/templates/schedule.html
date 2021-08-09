@@ -259,7 +259,6 @@
 
   }
 
-
   let inputEspMed = document.querySelector("#especialidade_medica");
   inputEspMed.onchange = () => findDoctors(inputEspMed.value);
 
@@ -328,7 +327,8 @@
               });
     }
 
-  document.getElementById("nome_do_medico").onclick = () => {
+  /*
+  document.getElementById("nome_do_medico").onchange = () => {
 
     let id_doctor = document.getElementById("nome_do_medico").value;
     document.getElementById("id_doctor").setAttribute("value", id_doctor);
@@ -349,7 +349,7 @@
                 // Converte a string JSON para um objeto JS
                 // A execução prosseguirá para o próximo .then
 
-                return response.json();
+                return response.clone().json();
 
               } else {
 
@@ -411,6 +411,8 @@
 
 
   }
+
+   */
 
 </script>
 
