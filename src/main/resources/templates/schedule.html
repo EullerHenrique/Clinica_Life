@@ -190,7 +190,7 @@
             <label for="nome_do_medico" class="form-label">Nome do médico</label>
           </div>
 
-          <input type="text" id="id_doctor" name="id_doctor" hidden required>
+          <input type="text" id="id_doctor" name="id_doctor" hidden >
 
           <div class="mb-3 col-md-6 form-floating">
             <input type="date" class="form-control" id="data_consulta" name="data_consulta"  >
@@ -202,7 +202,7 @@
               <option value="">&nbsp;</option>
             </select>
             <label for="hora_consulta" class="form-label">Horário Disponível</label>
-            <input type="time" id="hora_consulta_input" name="hora_consulta" hidden required>
+            <input type="time" id="hora_consulta_input" name="hora_consulta" hidden >
 
           </div>
           <div class="text-center">
@@ -327,14 +327,14 @@
               });
     }
 
-  /*
+
   document.getElementById("nome_do_medico").onchange = () => {
 
     let id_doctor = document.getElementById("nome_do_medico").value;
     document.getElementById("id_doctor").setAttribute("value", id_doctor);
 
     let select = document.getElementById("hora_consulta");
-    let url = 'http://localhost:8080/find_shedules/'+id_doctor;
+    let url = 'http://localhost:8080/find_schedules/'+id_doctor;
 
     //A api fetch busca uma resposta na url
 
@@ -359,7 +359,7 @@
 
             })
 
-            .then(shedules => {
+            .then(schedules => {
 
               //Redefime p select
 
@@ -371,25 +371,33 @@
 
               let horarios_disponiveis = [];
               for(let i=8; i <= 17; i++){
-                horarios_disponiveis.push(i+":"+"00");
+                if(i=== 8 || i === 9){
+                  horarios_disponiveis.push("0"+i+":"+"00");
+                }else {
+                  horarios_disponiveis.push(i + ":" + "00");
+                }
               }
 
-              shedules.forEach((shedule)=>{
+              schedules.scheduleList.forEach((schedule)=> {
 
                 horarios_disponiveis.forEach(h => {
-                  if(h===shedule.hora_consulta){
 
-                    horarios_disponiveis.pop(h);
+                  if (h === schedule.hora_consulta) {
+
+                    horarios_disponiveis.filter(item => item !== h);
 
                   }
+
                 })
 
-                for(let i=0; i < horarios_disponiveis.length; i++){
-                  option = new Option(horarios_disponiveis[i], horarios_disponiveis[i]);
-                  select.add(option, select.options);
-                }
-
               })
+
+                for(let i=0; i < horarios_disponiveis.length; i++){
+
+                  option = new Option(horarios_disponiveis[i], horarios_disponiveis[i]);
+                  select.add(option, select.options[select.length+1]);
+
+                }
 
             })
 
@@ -412,7 +420,7 @@
 
   }
 
-   */
+
 
 </script>
 

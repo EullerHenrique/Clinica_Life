@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import spring.clinica_life.models.Doctor;
 import spring.clinica_life.repositories.DoctorRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DoctorServiceImp implements DoctorService{
@@ -27,6 +28,11 @@ public class DoctorServiceImp implements DoctorService{
     @Override
     public List<Doctor> findByEspecialidade(String esp){
         return doctorRepository.findByEspecialidade(esp);
+    }
+
+    @Override
+    public Optional<Doctor> findById(Long id_doctor) {
+        return doctorRepository.findById(id_doctor);
     }
 
     @Override

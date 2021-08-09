@@ -39,8 +39,8 @@ public class Schedule {
     private LocalTime hora_consulta;
 
     @ManyToOne
-    @JoinColumn(name = "doctor")
-    private Doctor doctor;
+    @JoinColumn(name = "id_doctor")
+    private Doctor id_doctor;
 
     @Override
     public String toString() {
@@ -50,7 +50,7 @@ public class Schedule {
                 ", telefone='" + telefone + '\'' +
                 ", data_consulta=" + data_consulta +
                 ", hora_consulta=" + hora_consulta +
-                ", id_doctor=" + doctor +
+                ", id_doctor=" + id_doctor +
                 '}';
     }
 
@@ -96,11 +96,12 @@ public class Schedule {
         this.hora_consulta = hora_consulta;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public Doctor getId_doctor() {
+        return id_doctor;
     }
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+
+    public void setId_doctor(Doctor id_doctor) {
+        this.id_doctor = id_doctor;
     }
 }
 

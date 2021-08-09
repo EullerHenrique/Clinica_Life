@@ -16,7 +16,7 @@ public class Doctor extends Employee {
     @Column(length = 30)
     private String crm;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "id_doctor")
     private List<Schedule> scheduleList;
 
     public String getEspecialidade() {
