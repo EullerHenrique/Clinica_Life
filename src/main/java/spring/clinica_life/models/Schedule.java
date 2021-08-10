@@ -1,4 +1,5 @@
 package spring.clinica_life.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -40,6 +41,7 @@ public class Schedule {
 
     @ManyToOne
     @JoinColumn(name = "id_doctor")
+    @JsonIgnore
     private Doctor id_doctor;
 
     @Override

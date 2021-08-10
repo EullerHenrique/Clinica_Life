@@ -322,6 +322,12 @@
                 let option = new Option("", "&nbsp");
                 select.add(option, select.options[0]);
 
+                select = document.getElementById("hora_consulta");
+                options = document.querySelectorAll('#hora_consulta option');
+                options.forEach(option => option.remove());
+                option = new Option("", "&nbsp");
+                select.add(option, select.options[0]);
+
                 console.warn('Falha inesperada: ', error);
 
               });
@@ -382,9 +388,9 @@
 
                 horarios_disponiveis.forEach(h => {
 
-                  if (h === schedule.hora_consulta) {
+                  if (h+":"+"00" === schedule.hora_consulta) {
 
-                    horarios_disponiveis.filter(item => item !== h);
+                    horarios_disponiveis = horarios_disponiveis.filter(ha => ha !== h);
 
                   }
 
